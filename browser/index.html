@@ -12,9 +12,11 @@
     <script src="/js/album/album.controllers.js" defer></script>
     <script src="/js/album/album.factory.js" defer></script>
     <script src="/js/album/album.states.js" defer></script>
-    <script src="/js/player/player.controller.js" defer></script>
+    <!-- <script src="/js/player/player.controller.js" defer></script> -->
     <script src="/js/player/player.factory.js" defer></script>
+    <script src="/js/player/player.directives.js" defer></script>
     <script src="/js/sidebar/sidebar.controller.js" defer></script>
+     <script src="/js/sidebar/sidebar.directives.js" defer></script>
     <script src="/js/artist/artist.controllers.js" defer></script>
     <script src="/js/artist/artist.factory.js" defer></script>
     <script src="/js/artist/artist.states.js" defer></script>
@@ -27,8 +29,9 @@
   <body ng-app="juke">
     <div id="main" class="container-fluid">
 
-      <div class="col-xs-2">
-        <sidebar ng-controller="SidebarCtrl">
+ <div class="col-xs-2">
+ <sidebar ng-controller="SidebarCtrl"></sidebar>
+       <!--  <sidebar ng-controller="SidebarCtrl">
           <img src="juke.svg" class="logo">
           <section>
             <h4 ui-sref-active="active" class="menu-item active">
@@ -52,7 +55,7 @@
               <a ui-sref="newPlaylist" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> PLAYLIST</a>
             </p>
           </section>
-        </sidebar>
+        </sidebar> -->
       </div>
 
       <div class="col-xs-10">
@@ -60,8 +63,10 @@
       </div>
 
       <footer>
-        <div ng-show="getCurrentSong()" ng-controller="PlayerCtrl">
-          <div class="pull-left">
+       <player>
+        <div ng-show="getCurrentSong()">  </div>
+       </player>
+          <!-- <div class="pull-left">
             <button class="btn btn-default" ng-click="previous()">
               <span class="glyphicon glyphicon-step-backward"></span>
             </button>
@@ -76,8 +81,8 @@
             <div class="progress">
               <div class="progress-bar" ng-style="{width: getPercent() + '%'}"></div>
             </div>
-          </div>
-        </div>
+          </div> -->
+      
       </footer>
 
     </div>
