@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Juke</title>
+    <link href="/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="/bootstrap-dark.css" rel="stylesheet" />
+    <link href="/style.css" rel="stylesheet" />
+    <script src="/angular/angular.js" defer></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js" defer></script>
+    <script src="/angular-messages/angular-messages.js" defer></script>
+    <script src="/js/module.js" defer></script>
+    <script src="/js/album/album.controllers.js" defer></script>
+    <script src="/js/album/album.factory.js" defer></script>
+    <script src="/js/album/album.states.js" defer></script>
+    <script src="/js/player/player.controller.js" defer></script>
+    <script src="/js/player/player.factory.js" defer></script>
+    <script src="/js/sidebar/sidebar.controller.js" defer></script>
+    <script src="/js/artist/artist.controllers.js" defer></script>
+    <script src="/js/artist/artist.factory.js" defer></script>
+    <script src="/js/artist/artist.states.js" defer></script>
+    <script src="/js/song/song.factory.js" defer></script>
+    <script src="/js/song/song.controllers.js" defer></script>
+    <script src="/js/playlist/playlist.states.js" defer></script>
+    <script src="/js/playlist/playlist.factory.js" defer></script>
+    <script src="/js/playlist/playlist.controllers.js" defer></script>
+  </head>
+  <body ng-app="juke">
+    <div id="main" class="container-fluid">
+
+      <div class="col-xs-2">
+        <sidebar ng-controller="SidebarCtrl">
+          <img src="juke.svg" class="logo">
+          <section>
+            <h4 ui-sref-active="active" class="menu-item active">
+              <a ui-sref="albums">ALBUMS</a>
+            </h4>
+          </section>
+          <section>
+            <h4 ui-sref-active="active" class="menu-item">
+              <a ui-sref="artists">ARTISTS</a>
+            </h4>
+          </section>
+          <hr>
+          <section ng-controller="PlaylistsCtrl">
+            <h4 class="text-muted">PLAYLISTS</h4>
+            <p ui-sref-active="active" ng-repeat="playlist in playlists" class="menu-item">
+              <a ui-sref="playlist({playlistId: playlist.id })">
+                {{ playlist.name }}
+              </a>
+            </p>
+            <p>
+              <a ui-sref="newPlaylist" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-plus"></span> PLAYLIST</a>
+            </p>
+          </section>
+        </sidebar>
+      </div>
+
+      <div class="col-xs-10">
+        <ui-view></ui-view>
+      </div>
+
+      <footer>
+        <div ng-show="getCurrentSong()" ng-controller="PlayerCtrl">
+          <div class="pull-left">
+            <button class="btn btn-default" ng-click="previous()">
+              <span class="glyphicon glyphicon-step-backward"></span>
+            </button>
+            <button class="btn btn-default" ng-click="toggle()">
+              <span class="glyphicon" ng-class="{'glyphicon-pause': isPlaying(), 'glyphicon-play': !isPlaying()}"></span>
+            </button>
+            <button class="btn btn-default" ng-click="next()">
+              <span class="glyphicon glyphicon-step-forward"></span>
+            </button>
+          </div>
+          <div class="bar">
+            <div class="progress">
+              <div class="progress-bar" ng-style="{width: getPercent() + '%'}"></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </body>
+</html>
