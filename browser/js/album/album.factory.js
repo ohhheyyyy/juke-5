@@ -1,6 +1,6 @@
 'use strict';
 
-juke.factory('AlbumFactory', function ($http, SongFactory) {
+juke.factory('AlbumFactory', 'albumList', function ($http, SongFactory) {
 
   var AlbumFactory = {};
 
